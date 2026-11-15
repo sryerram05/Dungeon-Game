@@ -12,7 +12,7 @@ pygame.init()
 #create title for image and caption
 screen = pygame.display.set_mode((constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT))
 pygame.display.set_caption("Creepy Crawler")
-icon = pygame.image.load("creepy_crawler/assets/images/characters/big_demon/idle/0.png")
+icon = pygame.image.load("assets/images/characters/big_demon/idle/0.png")
 pygame.display.set_icon(icon)
 
 #create clock for maintaing frame rate
@@ -32,7 +32,7 @@ moving_right = False
 moving_down = False
 
 #define font
-font = pygame.font.Font("creepy_crawler/assets/fonts/AtariClassic.ttf", 20)
+font = pygame.font.Font("assets/fonts/AtariClassic.ttf", 20)
 
 # helper function to scale image
 def scale_img(image, scale):
@@ -41,37 +41,37 @@ def scale_img(image, scale):
     return pygame.transform.scale(image, (w * scale, h * scale))
 
 #load button images
-start_img = scale_img(pygame.image.load("creepy_crawler/assets/images/buttons/button_start.png").convert_alpha(), constants.BUTTON_SCALE)
-exit_img = scale_img(pygame.image.load("creepy_crawler/assets/images/buttons/button_exit.png").convert_alpha(), constants.BUTTON_SCALE)
-restart_img = scale_img(pygame.image.load("creepy_crawler/assets/images/buttons/button_restart.png").convert_alpha(), constants.BUTTON_SCALE)
-resume_img = scale_img(pygame.image.load("creepy_crawler/assets/images/buttons/button_resume.png").convert_alpha(), constants.BUTTON_SCALE)
+start_img = scale_img(pygame.image.load("assets/images/buttons/button_start.png").convert_alpha(), constants.BUTTON_SCALE)
+exit_img = scale_img(pygame.image.load("assets/images/buttons/button_exit.png").convert_alpha(), constants.BUTTON_SCALE)
+restart_img = scale_img(pygame.image.load("assets/images/buttons/button_restart.png").convert_alpha(), constants.BUTTON_SCALE)
+resume_img = scale_img(pygame.image.load("assets/images/buttons/button_resume.png").convert_alpha(), constants.BUTTON_SCALE)
 
 #load heart images
-heart_empty = scale_img(pygame.image.load("creepy_crawler/assets/images/items/heart_empty.png").convert_alpha(), constants.ITEM_SCALE)
-heart_half = scale_img(pygame.image.load("creepy_crawler/assets/images/items/heart_half.png").convert_alpha(), constants.ITEM_SCALE)
-heart_full = scale_img(pygame.image.load("creepy_crawler/assets/images/items/heart_full.png").convert_alpha(), constants.ITEM_SCALE)
+heart_empty = scale_img(pygame.image.load("assets/images/items/heart_empty.png").convert_alpha(), constants.ITEM_SCALE)
+heart_half = scale_img(pygame.image.load("assets/images/items/heart_half.png").convert_alpha(), constants.ITEM_SCALE)
+heart_full = scale_img(pygame.image.load("assets/images/items/heart_full.png").convert_alpha(), constants.ITEM_SCALE)
 
 #load coin images
 coin_images = []
 for x in range(4):
-    img = scale_img(pygame.image.load(f"creepy_crawler/assets/images/items/coin_f{x}.png").convert_alpha(), constants.ITEM_SCALE)
+    img = scale_img(pygame.image.load(f"assets/images/items/coin_f{x}.png").convert_alpha(), constants.ITEM_SCALE)
     coin_images.append(img)
 
 #load potion image
-red_potion = scale_img(pygame.image.load(f"creepy_crawler/assets/images/items/potion_red.png").convert_alpha(), constants.POTION_SCALE)     
+red_potion = scale_img(pygame.image.load(f"assets/images/items/potion_red.png").convert_alpha(), constants.POTION_SCALE)     
 
 item_images = []
 item_images.append(coin_images)
 item_images.append(red_potion)
 
 #load weapon images
-bow_image = scale_img(pygame.image.load("creepy_crawler/assets/images/weapons/bow.png").convert_alpha(), constants.WEAPON_SCALE)
-arrow_image = scale_img(pygame.image.load("creepy_crawler/assets/images/weapons/arrow.png").convert_alpha(), constants.WEAPON_SCALE)
-fireball_image = scale_img(pygame.image.load("creepy_crawler/assets/images/weapons/fireball.png").convert_alpha(), constants.FIREBALL_SCALE)
+bow_image = scale_img(pygame.image.load("assets/images/weapons/bow.png").convert_alpha(), constants.WEAPON_SCALE)
+arrow_image = scale_img(pygame.image.load("assets/images/weapons/arrow.png").convert_alpha(), constants.WEAPON_SCALE)
+fireball_image = scale_img(pygame.image.load("assets/images/weapons/fireball.png").convert_alpha(), constants.FIREBALL_SCALE)
 #load tilemap images
 tile_list = []
 for x in range(constants.TILE_TYPES):
-    tile_image = pygame.image.load(f"creepy_crawler/assets/images/tiles/{x}.png").convert_alpha()
+    tile_image = pygame.image.load(f"assets/images/tiles/{x}.png").convert_alpha()
     tile_image = pygame.transform.scale(tile_image, (constants.TILE_SIZE, constants.TILE_SIZE))
     tile_list.append(tile_image)
 
@@ -89,7 +89,7 @@ for mob in mob_types:
         #reset temporary list of images
         temp_list = []
         for i in range(4):
-            img = pygame.image.load(f'creepy_crawler/assets/images/characters/{mob}/{animation}/{i}.png').convert_alpha()
+            img = pygame.image.load(f'assets/images/characters/{mob}/{animation}/{i}.png').convert_alpha()
             img = scale_img(img, constants.SCALE)
             temp_list.append(img)
         animation_list.append(temp_list)
@@ -190,7 +190,7 @@ for row in range(constants.ROWS):
     r = [-1] * constants.COLS
     world_data.append(r)
 #load in level data and create world
-with open(f"creepy_crawler/levels/level{level}_data.csv", newline = "") as csvfile:
+with open(f"levels/level{level}_data.csv", newline = "") as csvfile:
     reader = csv.reader(csvfile, delimiter = ",") 
     for x, row in enumerate(reader):
         for y, tile in enumerate(row):
@@ -317,7 +317,7 @@ while run:
                 level += 1
                 world_data = reset_level()
                 #load in level data and create world
-                with open(f"creepy_crawler/levels/level{level}_data.csv", newline = "") as csvfile:
+                with open(f"levels/level{level}_data.csv", newline = "") as csvfile:
                     reader = csv.reader(csvfile, delimiter = ",") 
                     for x, row in enumerate(reader):
                         for y, tile in enumerate(row):
@@ -350,7 +350,7 @@ while run:
                         start_intro = True
                         world_data = reset_level()
                         #load in level data and create world
-                        with open(f"creepy_crawler/levels/level{level}_data.csv", newline = "") as csvfile:
+                        with open(f"levels/level{level}_data.csv", newline = "") as csvfile:
                             reader = csv.reader(csvfile, delimiter = ",") 
                             for x, row in enumerate(reader):
                                 for y, tile in enumerate(row):
